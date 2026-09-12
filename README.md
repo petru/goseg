@@ -15,11 +15,26 @@ stay with that sentence.
 **License:** MIT. Copyright Kevin S. Dias (pragmatic_segmenter) and
 Petru Madar (goseg).
 
-## Install
+## Build
+
+Requires [Go](https://go.dev/dl/) 1.22 or later. There are no extra
+dependencies.
 
 ```
-go get goseg
+git clone https://github.com/petru/goseg.git
+cd goseg
+go test ./...
+go build -o goseg ./cmd/goseg
 ```
+
+That writes a `goseg` binary in the current directory. To install it on
+your `PATH`:
+
+```
+go install ./cmd/goseg
+```
+
+From a clone, import the library as `goseg` (see below).
 
 ## Library
 
@@ -82,12 +97,14 @@ single core (same sentences).
 
 ## Command line
 
+After `go build -o goseg ./cmd/goseg` (or `go run ./cmd/goseg`):
+
 ```
-go run ./cmd/goseg -lang en file.txt
-cat file.txt | go run ./cmd/goseg -lang ja
-go run ./cmd/goseg -doc-type pdf -clean-only file.txt
-go run ./cmd/goseg -workers 1 file.txt    # sequential
-go run ./cmd/goseg -workers 0 file.txt    # all CPUs (default)
+./goseg -lang en file.txt
+cat file.txt | ./goseg -lang ja
+./goseg -doc-type pdf -clean-only file.txt
+./goseg -workers 1 file.txt    # sequential
+./goseg -workers 0 file.txt    # all CPUs (default)
 ```
 
 Prints one sentence per line. Flags: `-lang`, `-doc-type`, `-no-clean`,
