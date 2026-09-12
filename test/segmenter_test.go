@@ -144,6 +144,58 @@ func TestSegment(t *testing.T) {
 			text: "<b></b>",
 			want: []string{},
 		},
+		{
+			name: "consecutive curly dialogue",
+			text: "“I was measured for one while I was still in the hospital, of course, and I got the hard sell on it from just about everyone—especially my physical therapist and this psychologist friend of mine. They said the quicker I learned to use it, the quicker I’d be able to get on with my life—” “Just put the whole thing behind you and go on dancing—” “Yes.” “Only sometimes putting a thing behind you isn’t so easy to do.” “No.” “Sometimes it’s not even right,” Wireman said.",
+			want: []string{
+				"“I was measured for one while I was still in the hospital, of course, and I got the hard sell on it from just about everyone—especially my physical therapist and this psychologist friend of mine. They said the quicker I learned to use it, the quicker I’d be able to get on with my life—”",
+				"“Just put the whole thing behind you and go on dancing—”",
+				"“Yes.”",
+				"“Only sometimes putting a thing behind you isn’t so easy to do.”",
+				"“No.”",
+				"“Sometimes it’s not even right,” Wireman said.",
+			},
+		},
+		{
+			name: "consecutive straight dialogue",
+			text: `"Yes." "Only sometimes putting a thing behind you isn't so easy to do." "No."`,
+			want: []string{
+				`"Yes."`,
+				`"Only sometimes putting a thing behind you isn't so easy to do."`,
+				`"No."`,
+			},
+		},
+		{
+			name: "quote then capital still splits",
+			text: `She turned to him, "This is great." She held the book out to show him.`,
+			want: []string{
+				`She turned to him, "This is great."`,
+				"She held the book out to show him.",
+			},
+		},
+		{
+			name: "quote then lowercase attribution stays together",
+			text: `She turned to him, "This is great." she said.`,
+			want: []string{
+				`She turned to him, "This is great." she said.`,
+			},
+		},
+		{
+			name: "comma attribution after consecutive dialogue",
+			text: `"No." "Sometimes it's not even right," Wireman said.`,
+			want: []string{
+				`"No."`,
+				`"Sometimes it's not even right," Wireman said.`,
+			},
+		},
+		{
+			name: "emdash quote then capital",
+			text: `He said, “get on with my life—” She replied.`,
+			want: []string{
+				`He said, “get on with my life—”`,
+				"She replied.",
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

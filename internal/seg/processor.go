@@ -261,7 +261,7 @@ func splitQuoteAtEnd(txt string) []string {
 	var out []string
 	last := 0
 	for _, loc := range locs {
-		// groups: 1 = punct+quote, 2 = capital. The split is the space between them.
+		// groups: 1 = punct+quote, 2 = next sentence start (capital or opening quote).
 		spaceStart := loc[3] // end of group 1
 		spaceEnd := loc[4]   // start of group 2
 		out = append(out, txt[last:spaceStart])

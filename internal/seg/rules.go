@@ -139,8 +139,11 @@ var (
 
 	reParensBetweenQuotes = mustRE(`["”]\s\(.*\)\s["“]`)
 
-	reQuoteAtEnd = mustRE(`[!?\.-]["'\x{201d}\x{201c}]\s[A-Z]`)
-	reSplitQuote = mustRE(`([!?\.-]["'\x{201d}\x{201c}])\s([A-Z])`)
+	// Sentence-ending punct before a closer, then whitespace, then a new
+	// sentence (capital) or another opening quote (consecutive dialogue).
+	// Includes en/em dashes so interrupted speech (“life—”) can close a turn.
+	reQuoteAtEnd = mustRE(`[!?.\x{2013}\x{2014}-]["'\x{201d}\x{201c}]\s+[A-Z"'\x{201c}\x{2018}\x{201e}]`)
+	reSplitQuote = mustRE(`([!?.\x{2013}\x{2014}-]["'\x{201d}\x{201c}])\s+([A-Z"'\x{201c}\x{2018}\x{201e}])`)
 
 	reLetterOnly     = mustRE(`\A[a-zA-Z]*\z`)
 	reUnderscores    = mustRE(`_{3,}`)
