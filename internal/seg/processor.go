@@ -224,13 +224,13 @@ func matchSpecialBoundary(s string, pos int) (string, int) {
 	if m, adv := try(reParenSent, reParenSentAhead); adv > 0 {
 		return m, adv
 	}
-	if m, adv := try(reSQuoteSent, reQuoteSentAhead); adv > 0 {
+	if m, adv := try(reSQuoteSent, reQuoteSentAhead); adv > 0 && !hasInnerSentenceBoundary(m) {
 		return m, adv
 	}
-	if m, adv := try(reDQuoteSent, reQuoteSentAhead); adv > 0 {
+	if m, adv := try(reDQuoteSent, reQuoteSentAhead); adv > 0 && !hasInnerSentenceBoundary(m) {
 		return m, adv
 	}
-	if m, adv := try(reSmartQuoteSent, reQuoteSentAhead); adv > 0 {
+	if m, adv := try(reSmartQuoteSent, reQuoteSentAhead); adv > 0 && !hasInnerSentenceBoundary(m) {
 		return m, adv
 	}
 	return "", 0

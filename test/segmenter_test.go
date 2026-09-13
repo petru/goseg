@@ -148,12 +148,53 @@ func TestSegment(t *testing.T) {
 			name: "consecutive curly dialogue",
 			text: "“I was measured for one while I was still in the hospital, of course, and I got the hard sell on it from just about everyone—especially my physical therapist and this psychologist friend of mine. They said the quicker I learned to use it, the quicker I’d be able to get on with my life—” “Just put the whole thing behind you and go on dancing—” “Yes.” “Only sometimes putting a thing behind you isn’t so easy to do.” “No.” “Sometimes it’s not even right,” Wireman said.",
 			want: []string{
-				"“I was measured for one while I was still in the hospital, of course, and I got the hard sell on it from just about everyone—especially my physical therapist and this psychologist friend of mine. They said the quicker I learned to use it, the quicker I’d be able to get on with my life—”",
+				"“I was measured for one while I was still in the hospital, of course, and I got the hard sell on it from just about everyone—especially my physical therapist and this psychologist friend of mine.",
+				"They said the quicker I learned to use it, the quicker I’d be able to get on with my life—”",
 				"“Just put the whole thing behind you and go on dancing—”",
 				"“Yes.”",
 				"“Only sometimes putting a thing behind you isn’t so easy to do.”",
 				"“No.”",
 				"“Sometimes it’s not even right,” Wireman said.",
+			},
+		},
+		{
+			name: "multi-sentence straight dialogue",
+			text: `"Don't go beyond, no matter how much you feel you need to, Doctor. The barrier was not made to be broken. Remember this: there is more power here than you know. It is old and always restless. Remember."`,
+			want: []string{
+				`"Don't go beyond, no matter how much you feel you need to, Doctor.`,
+				"The barrier was not made to be broken.",
+				"Remember this: there is more power here than you know.",
+				"It is old and always restless.",
+				`Remember."`,
+			},
+		},
+		{
+			name: "multi-sentence curly dialogue",
+			text: "“Don't go beyond, no matter how much you feel you need to, Doctor. The barrier was not made to be broken. Remember this: there is more power here than you know. It is old and always restless. Remember.”",
+			want: []string{
+				"“Don't go beyond, no matter how much you feel you need to, Doctor.",
+				"The barrier was not made to be broken.",
+				"Remember this: there is more power here than you know.",
+				"It is old and always restless.",
+				"Remember.”",
+			},
+		},
+		{
+			name: "inner dialogue then following sentence",
+			text: `"Don't go beyond, Doctor. The barrier was not made to be broken." She turned away.`,
+			want: []string{
+				`"Don't go beyond, Doctor.`,
+				`The barrier was not made to be broken."`,
+				"She turned away.",
+			},
+		},
+		{
+			name: "question and exclamation inside dialogue",
+			text: `"What do you want? I need to know. Stop!"`,
+			want: []string{
+				`"What do you want?`,
+				"I need to know.",
+				`Stop!"`,
 			},
 		},
 		{

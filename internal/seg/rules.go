@@ -191,9 +191,9 @@ var (
 	reBetweenAngleZH  = mustRE(`《([^》\\]|\\.)*》`)
 	reBetweenLBracket = mustRE(`「([^」\\]|\\.)*」`)
 
-	reDEDoubleQuote = mustRE(`„([^“\\]|\\.)*“`)
-	reDESplitQuote  = mustRE(`\A„([^“\\]|\\.)*“`)
-	reDEUnconvQuote = mustRE(`,,([^“\\]|\\.)*“`)
+	reDEDoubleQuote = mustRE(`„([^“”\\]|\\.)*[“”]`)
+	reDESplitQuote  = mustRE(`\A„([^“”\\]|\\.)*[“”]`)
+	reDEUnconvQuote = mustRE(`,,([^“”\\]|\\.)*[“”]`)
 
 	reExclWords = mustRE(`!Xũ|!Kung|ǃʼOǃKung|!Xuun|!Kung-Ekoka|ǃHu|ǃKhung|ǃKu|ǃung|ǃXo|ǃXû|ǃXung|ǃXũ|!Xun|Yahoo!|Y!J|Yum!`)
 
